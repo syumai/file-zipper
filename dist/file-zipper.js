@@ -11013,10 +11013,12 @@ var zipRemoteFiles = exports.zipRemoteFiles = function () {
 
 
 var downloadZip = exports.downloadZip = function () {
-  var _ref5 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(files, _ref4) {
-    var remote = _ref4.remote,
-        _ref4$as = _ref4.as,
-        as = _ref4$as === undefined ? 'files' : _ref4$as;
+  var _ref4 = _asyncToGenerator(regeneratorRuntime.mark(function _callee3(files) {
+    var _ref5 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {},
+        remote = _ref5.remote,
+        _ref5$as = _ref5.as,
+        as = _ref5$as === undefined ? 'files' : _ref5$as;
+
     var blob;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
@@ -11055,8 +11057,8 @@ var downloadZip = exports.downloadZip = function () {
     }, _callee3, this);
   }));
 
-  return function downloadZip(_x3, _x4) {
-    return _ref5.apply(this, arguments);
+  return function downloadZip(_x4) {
+    return _ref4.apply(this, arguments);
   };
 }();
 

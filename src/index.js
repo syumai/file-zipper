@@ -58,7 +58,7 @@ export async function zipRemoteFiles(remoteFiles) {
 /**
  * Start download zipped files
  */
-export async function downloadZip(files, { remote, as = 'files' }) {
+export async function downloadZip(files, { remote, as = 'files' } = {}) {
   let blob;
   if (remote) {
     blob = await zipRemoteFiles(files);
