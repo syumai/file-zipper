@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Fetch Zip download example</title>
+<style>
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+</style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="form-group">
+        <input v-for="{ id, url } in files" key="id" v-model="url">
+      </div>
+      <button @click="addFile">Add file</button><br>
+      <button @click="download">Download as zip</button>
+    </div>
+    <script src="https://unpkg.com/vue"></script>
+    <script src="../dist/file-zipper.js"></script>
+    <script>
+const downloadButton = document.getElementById('downloadButton');
+
+new Vue({
+  el: '#app',
+  data: {
+    files: [
+      {
+        id: 1,
+        url: 'https://jp.vuejs.org/images/logo.png'
+      },
+      {
+        id: 2,
+        url: 'https://facebook.github.io/react/img/logo.svg'
+      }
+    ]
+  },
+  methods: {
+    download() {
+      FileZipper.downloadZip(this.files.map(({ url }) => url), { remote: true });
+    },
+    addFile() {
+      this.files.push({
+        id: this.files.length,
+        url: ''
+      });
+    }
+  }
+});
+    </script>
+  </body>
+</html>
+

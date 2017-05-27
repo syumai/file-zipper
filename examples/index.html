@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>File Zipper example</title>
+    <style>
+#dropArea {
+  width: 400px;
+  height: 300px;
+  background-color: #faa;
+}
+    </style>
+  </head>
+  <body>
+    <div id="dropArea">
+      Drop your files here
+      <div id="fileNamesContainer"></div>
+    </div>
+    <button id="downloadButton">Download zip</button>
+    <script src="../dist/file-zipper.js"></script>
+    <script>
+const dropArea = document.getElementById('dropArea');
+const fileNamesContainer = document.getElementById('fileNamesContainer');
+const downloadButton = document.getElementById('downloadButton');
+
+const files = [];
+
+const renderFileNames = () => fileNamesContainer.innerHTML = Array.from(files).map((file) => file.name).join('<br>');
+
+dropArea.addEventListener('dragover', (event) => {
+  event.preventDefault();
+});
+
+dropArea.addEventListener('drop', (event) => {
+  event.preventDefault();
+  files.push(...event.dataTransfer.files);
+  renderFileNames();
+});
+
+downloadButton.addEventListener('click', () => {
+  FileZipper.downloadZip(files);
+});
+    </script>
+  </body>
+</html>
+
