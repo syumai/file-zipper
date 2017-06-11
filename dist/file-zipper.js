@@ -10791,6 +10791,8 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.downloadZip = exports.zipRemoteFiles = exports.zipFiles = undefined;
 
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
 /**
  * Returns blob of zipped files
  */
@@ -10899,12 +10901,16 @@ var zipFiles = exports.zipFiles = function () {
 
 /**
  * Returns blob of zipped files
+ * remoteFile: {
+ *   url: 'http://example.com/example.jpg',
+ *   filename: 'example'
+ * }
  */
 
 
 var zipRemoteFiles = exports.zipRemoteFiles = function () {
   var _ref3 = _asyncToGenerator(regeneratorRuntime.mark(function _callee2(remoteFiles) {
-    var files, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, fileURL, response, blob, filename, file;
+    var files, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, remoteFile, url, filename, response, blob, file;
 
     return regeneratorRuntime.wrap(function _callee2$(_context2) {
       while (1) {
@@ -10919,87 +10925,95 @@ var zipRemoteFiles = exports.zipRemoteFiles = function () {
 
           case 6:
             if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-              _context2.next = 26;
+              _context2.next = 27;
               break;
             }
 
-            fileURL = _step2.value;
+            remoteFile = _step2.value;
             _context2.prev = 8;
-            _context2.next = 11;
-            return fetch(fileURL);
+            url = void 0, filename = void 0;
 
-          case 11:
+            if ((typeof remoteFile === 'undefined' ? 'undefined' : _typeof(remoteFile)) === 'object') {
+              url = remoteFile.url;
+              filename = remoteFile.filename;
+            } else {
+              url = remoteFile;
+              filename = url.split('/').pop();
+            }
+            _context2.next = 13;
+            return fetch(url);
+
+          case 13:
             response = _context2.sent;
-            _context2.next = 14;
+            _context2.next = 16;
             return response.blob();
 
-          case 14:
+          case 16:
             blob = _context2.sent;
-            filename = fileURL.split('/').pop();
             file = new File([blob], filename, { lastModified: Date.now() });
 
             files.push(file);
-            _context2.next = 23;
+            _context2.next = 24;
             break;
 
-          case 20:
-            _context2.prev = 20;
+          case 21:
+            _context2.prev = 21;
             _context2.t0 = _context2['catch'](8);
 
             console.error(_context2.t0);
 
-          case 23:
+          case 24:
             _iteratorNormalCompletion2 = true;
             _context2.next = 6;
             break;
 
-          case 26:
-            _context2.next = 32;
+          case 27:
+            _context2.next = 33;
             break;
 
-          case 28:
-            _context2.prev = 28;
+          case 29:
+            _context2.prev = 29;
             _context2.t1 = _context2['catch'](4);
             _didIteratorError2 = true;
             _iteratorError2 = _context2.t1;
 
-          case 32:
-            _context2.prev = 32;
+          case 33:
             _context2.prev = 33;
+            _context2.prev = 34;
 
             if (!_iteratorNormalCompletion2 && _iterator2.return) {
               _iterator2.return();
             }
 
-          case 35:
-            _context2.prev = 35;
+          case 36:
+            _context2.prev = 36;
 
             if (!_didIteratorError2) {
-              _context2.next = 38;
+              _context2.next = 39;
               break;
             }
 
             throw _iteratorError2;
 
-          case 38:
-            return _context2.finish(35);
-
           case 39:
-            return _context2.finish(32);
+            return _context2.finish(36);
 
           case 40:
-            _context2.next = 42;
+            return _context2.finish(33);
+
+          case 41:
+            _context2.next = 43;
             return zipFiles(files);
 
-          case 42:
+          case 43:
             return _context2.abrupt('return', _context2.sent);
 
-          case 43:
+          case 44:
           case 'end':
             return _context2.stop();
         }
       }
-    }, _callee2, this, [[4, 28, 32, 40], [8, 20], [33,, 35, 39]]);
+    }, _callee2, this, [[4, 29, 33, 41], [8, 21], [34,, 36, 40]]);
   }));
 
   return function zipRemoteFiles(_x2) {

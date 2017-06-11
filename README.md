@@ -18,6 +18,18 @@ FileZipper.downloadZip(someArrayOfFiles);
 const remoteFileURLs = [ url1, url2 ];
 FileZipper.downloadZip(remoteFileURLs, { remote: true });
 
+// Download remote files as zip
+const remoteFileURLsWithName = [
+  {
+    url: url1,
+    filename: filename1
+  }, {
+    url: url2,
+    filename: filename2
+  }
+];
+FileZipper.downloadZip(remoteFileURLsWithName, { remote: true });
+
 // Name zip (file name will be 'named-zip.zip')
 FileZipper.downloadZip(someArrayOfFiles, { as: 'named-zip' });
 ```

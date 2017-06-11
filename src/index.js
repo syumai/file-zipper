@@ -38,14 +38,25 @@ export async function zipFiles(files) {
 
 /**
  * Returns blob of zipped files
+ * remoteFile: {
+ *   url: 'http://example.com/example.jpg',
+ *   filename: 'example'
+ * }
  */
 export async function zipRemoteFiles(remoteFiles) {
   const files = [];
-  for (const fileURL of remoteFiles) {
+  for (const remoteFile of remoteFiles) {
     try {
-      const response = await fetch(fileURL);
+      let url, filename;
+      if (typeof remoteFile === 'object') {
+        url = remoteFile.url;
+        filename = remoteFile.filename;
+      } else {
+        url = remoteFile;
+        filename = url.split('/').pop();
+      }
+      const response = await fetch(url);
       const blob = await response.blob();
-      const filename = fileURL.split('/').pop();
       const file = new File([blob], filename, { lastModified: Date.now() });
       files.push(file);
     } catch (err) {
