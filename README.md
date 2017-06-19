@@ -5,8 +5,8 @@
 
 ## Examples
 
-* [Drag & Drop & Zipping](https://syumai.github.io/examples/)
-* [Zipping remote files from URL](https://syumai.github.io/examples/fetch-download.html)
+* [Drag & Drop & Zipping](https://syumai.github.io/file-zipper/examples/)
+* [Zipping remote files from URL](https://syumai.github.io/file-zipper/examples/fetch-download.html)
 
 ## Usage
 
